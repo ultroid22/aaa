@@ -16,18 +16,18 @@ jobs:
          name: "Cancel duplicate workflow runs"
          with:
             all_but_latest: true
-            access_token: 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 
+            access_token: ${{ github.token }}
        - name: initialization
          continue-on-error: true
          run: |
-           git config --global user.name rimuru-0
-           git config --global user.email japaneseemail00@gmail.com
+           git config --global user.name ${{ secrets.GitHubName }}
+           git config --global user.email ${{ secrets.GitHubMail }}
            git config --global credential.helper store
-           echo "https://rimuru-01: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@github.com/rimuru-01/ultroid-termux" > ~/.git-credentials
+           echo "https://${{ secrets.GitHubName }}:${{ secrets.GH_TOKEN }}@github.com" > ~/.git-credentials
        - name: cloning repo
          continue-on-error: true
          run: |
-           git clone https://rimuru-01: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@github.com/rimuru-01/ultroid-termux ultroid
+           git clone https://${{ secrets.GitHubName }}:${{ secrets.GH_TOKEN }}@${{ secrets.CREDS }} ultroid
        - name: Running Ultroid
          timeout-minutes: 350
          continue-on-error: true
@@ -41,5 +41,4 @@ jobs:
               echo $(date -u +%T%P) >> loop.txt
               git add loop.txt
               git commit -m "Workflow : Loop $(date -u +%D-%T%P)"
-              git push -q https://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@github.com/${GITHUB_REPOSITORY} HEAD:main
-
+              git push -q https://${{ secrets.GH_TOKEN }}@github.com/${GITHUB_REPOSITORY} HEAD:main
