@@ -16,12 +16,12 @@ jobs:
          name: "Cancel duplicate workflow runs"
          with:
             all_but_latest: true
-            access_token: ${{ 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 }}
+            access_token: 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 
        - name: initialization
          continue-on-error: true
          run: |
-           git config --global user.name ${rimuru-01}
-           git config --global user.email ${japaneseemail00@gmail.com}
+           git config --global user.name rimuru-0
+           git config --global user.email japaneseemail00@gmail.com
            git config --global credential.helper store
            echo "https://rimuru-01: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@github.com/rimuru-01/ultroid-termux" > ~/.git-credentials
        - name: cloning repo
